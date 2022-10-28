@@ -51,16 +51,7 @@ public class Main {
             dev_actual_array[i] = dev_actual_list.get(i);
         double[] dev_prediction = predictArray(models, buildPointArray(devFeatureList));
         swap(dev_prediction);
-        String final_result = "";
-        int num;
-        for(int i = 0; i < dev_prediction.length; i++){
-            if(dev_prediction[i] > 0.5)
-                num = 1;
-            else
-                num = 0;
-            final_result += i + "\t" + num + "\n";
-        }
-        Data.writeToFile(final_result);
+
 
         int result = comparePrediction(dev_prediction, dev_actual_array);
         System.out.println();
@@ -82,6 +73,18 @@ public class Main {
         for(int i = 0; i < 3; i++){
             printRatio("split train: "+i+": ", trainingSetSplit[i].actual);
         }
+
+
+        String final_result = "";
+        int num;
+        for(int i = 0; i < test_prediction.length; i++){
+            if(test_prediction[i] > 0.5)
+                num = 1;
+            else
+                num = 0;
+            final_result += "test_id_"+i + "\t" + num + "\n";
+        }
+        Data.writeToFile(final_result);
 
 
 
